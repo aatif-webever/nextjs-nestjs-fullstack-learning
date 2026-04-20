@@ -42,8 +42,8 @@ backend/lerna-debug.log*
 backend/.DS_Store
 
 # Tests
-backend//coverage
-backend//.nyc_output
+backend/coverage
+backend/.nyc_output
 
 # IDEs and editors
 backend/.idea
