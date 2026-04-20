@@ -1,3 +1,2 @@
-# nextjs-nestjs-fullstack-learning
+# Project Name: JobSphere
 Learning Project 
-manita here.
