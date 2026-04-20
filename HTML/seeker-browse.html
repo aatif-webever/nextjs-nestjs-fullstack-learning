@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Browse Jobs — JobSphere</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#070c1a;--bg2:#0d1529;--bg3:#111e38;--bg4:#162140;--card:#0f1a30;--card2:#132240;--border:#1e3055;--border2:#243860;--accent:#4f9cf9;--accent2:#7c3aed;--accent3:#10b981;--danger:#ef4444;--warn:#f59e0b;--text:#e2e8f0;--text2:#94a3b8;--text3:#475569;--radius:10px;--radius2:14px;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;font-size:14px;line-height:1.6;}
+h1,h2,h3,h4,h5{font-family:'Sora',sans-serif;font-weight:600;}
+a{color:var(--accent);text-decoration:none;}
+a:hover{text-decoration:underline;}
+.layout{display:flex;min-height:100vh;}
+.sidebar{width:240px;min-height:100vh;background:var(--bg2);border-right:1px solid var(--border);display:flex;flex-direction:column;position:fixed;top:0;left:0;bottom:0;z-index:100;overflow-y:auto;}
+.sidebar-logo{padding:22px 20px 18px;border-bottom:1px solid var(--border);font-family:'Sora',sans-serif;font-size:19px;font-weight:700;display:flex;align-items:center;gap:10px;}
+.logo-mark{width:28px;height:28px;border-radius:7px;background:linear-gradient(135deg,var(--accent),var(--accent2));display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#fff;flex-shrink:0;}
+.sidebar-nav{flex:1;padding:14px 10px;display:flex;flex-direction:column;gap:2px;}
+.nav-section{font-size:10px;font-weight:700;color:var(--text3);letter-spacing:.08em;text-transform:uppercase;padding:12px 10px 5px;}
+.nav-item{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:var(--radius);color:var(--text2);text-decoration:none;font-size:13px;transition:all .15s;}
+.nav-item:hover{background:var(--bg3);color:var(--text);text-decoration:none;}
+.nav-item.active{background:rgba(79,156,249,.14);color:var(--accent);}
+.nav-icon{width:16px;height:16px;flex-shrink:0;opacity:.8;}
+.sidebar-user{padding:14px 16px;border-top:1px solid var(--border);display:flex;align-items:center;gap:10px;}
+.av{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent2));display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff;flex-shrink:0;}
+.av-info .name{font-size:12.5px;font-weight:700;}
+.av-info .role{font-size:11px;color:var(--text2);}
+.main{margin-left:240px;flex:1;display:flex;flex-direction:column;}
+.topbar{padding:14px 28px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;background:var(--bg2);position:sticky;top:0;z-index:50;}
+.topbar-title{font-family:'Sora',sans-serif;font-size:17px;font-weight:700;}
+.topbar-right{display:flex;align-items:center;gap:10px;}
+.page{padding:28px;flex:1;}
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius2);padding:22px;}
+.btn{display:inline-flex;align-items:center;gap:7px;padding:9px 18px;border-radius:var(--radius);font-family:'Nunito',sans-serif;font-size:13px;font-weight:700;cursor:pointer;transition:all .15s;border:none;line-height:1;}
+.btn-primary{background:var(--accent);color:#fff;}
+.btn-primary:hover{background:#3d8ef5;}
+.btn-ghost{background:transparent;color:var(--text2);border:1px solid var(--border2);}
+.btn-ghost:hover{background:var(--bg3);color:var(--text);}
+.btn-danger{background:rgba(239,68,68,.1);color:var(--danger);border:1px solid rgba(239,68,68,.2);}
+.btn-danger:hover{background:rgba(239,68,68,.2);}
+.btn-success{background:rgba(16,185,129,.1);color:var(--accent3);border:1px solid rgba(16,185,129,.2);}
+.btn-success:hover{background:rgba(16,185,129,.2);}
+.btn-warn{background:rgba(245,158,11,.1);color:var(--warn);border:1px solid rgba(245,158,11,.2);}
+.btn-sm{padding:6px 12px;font-size:12px;}
+.btn-lg{padding:13px 26px;font-size:15px;}
+.btn-block{width:100%;justify-content:center;}
+.form-group{display:flex;flex-direction:column;gap:6px;margin-bottom:0;}
+.label{font-size:12px;font-weight:700;color:var(--text2);letter-spacing:.04em;text-transform:uppercase;}
+.input{background:var(--bg3);border:1px solid var(--border2);border-radius:var(--radius);padding:10px 14px;color:var(--text);font-family:'Nunito',sans-serif;font-size:14px;transition:border-color .15s;width:100%;}
+.input:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(79,156,249,.1);}
+.input::placeholder{color:var(--text3);}
+select.input{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2394a3b8' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:36px;cursor:pointer;}
+textarea.input{resize:vertical;min-height:110px;}
+.hint{font-size:11.5px;color:var(--text3);}
+.err{font-size:11.5px;color:var(--danger);}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;}
+.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
+.gap-4{display:flex;flex-direction:column;gap:16px;}
+.gap-6{display:flex;flex-direction:column;gap:24px;}
+.flex{display:flex;align-items:center;}
+.flex-between{display:flex;align-items:center;justify-content:space-between;}
+.flex-gap{display:flex;align-items:center;gap:10px;}
+.badge{display:inline-flex;align-items:center;padding:3px 9px;border-radius:20px;font-size:11px;font-weight:700;}
+.badge-blue{background:rgba(79,156,249,.12);color:var(--accent);}
+.badge-green{background:rgba(16,185,129,.12);color:var(--accent3);}
+.badge-red{background:rgba(239,68,68,.12);color:var(--danger);}
+.badge-yellow{background:rgba(245,158,11,.12);color:var(--warn);}
+.badge-purple{background:rgba(124,58,237,.12);color:#a78bfa;}
+.badge-gray{background:rgba(71,85,105,.2);color:var(--text2);}
+.table-wrap{border-radius:var(--radius2);border:1px solid var(--border);overflow:hidden;}
+table{width:100%;border-collapse:collapse;}
+th{background:var(--bg3);padding:10px 16px;text-align:left;font-size:11px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:.07em;border-bottom:1px solid var(--border);}
+td{padding:12px 16px;border-bottom:1px solid var(--border);font-size:13.5px;}
+tr:last-child td{border-bottom:none;}
+tr:hover td{background:rgba(255,255,255,.015);}
+.stat-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius2);padding:20px;}
+.stat-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;margin-bottom:12px;}
+.stat-label{font-size:11.5px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:.06em;}
+.stat-value{font-family:'Sora',sans-serif;font-size:28px;font-weight:700;margin-top:3px;}
+.stat-change{font-size:12px;margin-top:4px;color:var(--accent3);}
+.chip{display:inline-flex;align-items:center;gap:5px;padding:4px 10px;background:var(--bg3);border:1px solid var(--border2);border-radius:20px;font-size:12px;color:var(--text2);}
+.chip-x{cursor:pointer;color:var(--text3);line-height:1;}
+.tags-wrap{display:flex;flex-wrap:wrap;gap:6px;padding:8px 10px;background:var(--bg3);border:1px solid var(--border2);border-radius:var(--radius);min-height:44px;}
+.tags-wrap input{border:none;background:transparent;color:var(--text);font-size:14px;outline:none;min-width:120px;flex:1;font-family:'Nunito',sans-serif;}
+.dropzone{border:2px dashed var(--border2);border-radius:var(--radius2);padding:30px;text-align:center;cursor:pointer;transition:.15s;}
+.dropzone:hover{border-color:var(--accent);background:rgba(79,156,249,.04);}
+.divider{border:none;border-top:1px solid var(--border);margin:20px 0;}
+.check-group{display:flex;align-items:center;gap:8px;cursor:pointer;font-size:13.5px;}
+.check-group input{width:15px;height:15px;accent-color:var(--accent);cursor:pointer;}
+.progress{height:6px;background:var(--bg3);border-radius:3px;overflow:hidden;}
+.progress-bar{height:100%;border-radius:3px;background:linear-gradient(90deg,var(--accent),var(--accent2));}
+.alert{padding:12px 16px;border-radius:var(--radius);font-size:13px;}
+.alert-info{background:rgba(79,156,249,.1);border:1px solid rgba(79,156,249,.2);color:#7bb8fb;}
+.alert-success{background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.2);color:var(--accent3);}
+.alert-danger{background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.2);color:#f87171;}
+.toggle-wrap{position:relative;width:38px;height:20px;flex-shrink:0;}
+.toggle-wrap input{opacity:0;width:0;height:0;position:absolute;}
+.toggle-track{position:absolute;inset:0;background:var(--border2);border-radius:10px;cursor:pointer;transition:.2s;}
+.toggle-wrap input:checked+.toggle-track{background:var(--accent);}
+.toggle-thumb{position:absolute;top:2px;left:2px;width:16px;height:16px;border-radius:50%;background:#fff;transition:.2s;pointer-events:none;}
+.toggle-wrap input:checked~.toggle-thumb{transform:translateX(18px);}
+::-webkit-scrollbar{width:5px;}
+::-webkit-scrollbar-track{background:var(--bg2);}
+::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px;}
+input[type=range]{accent-color:var(--accent);width:100%;}
+.section-head{margin-bottom:20px;}
+.section-title{font-size:16px;font-weight:700;margin-bottom:4px;}
+.section-sub{font-size:13px;color:var(--text2);}
+</style>
+</head>
+<body>
+<div class="layout">
+
+<div class="sidebar">
+  <div class="sidebar-logo">
+    <div style="width:28px;height:28px;border-radius:7px;background:linear-gradient(135deg,#4f9cf9,#7c3aed);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#fff;">J</div>
+    JobSphere
+  </div>
+  <nav class="sidebar-nav">
+    <a href="#" class="nav-item"><svg style="width:16px;height:16px;" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg> Dashboard</a>
+    <a href="seeker-browse.html" class="nav-item active"><svg style="width:16px;height:16px;" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg> Browse Jobs</a>
+    <a href="#" class="nav-item"><svg style="width:16px;height:16px;" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l7.78 7.78 7.78-7.78a5.5 5.5 0 000-7.78z"/></svg> Saved Jobs</a>
+    <a href="#" class="nav-item"><svg style="width:16px;height:16px;" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg> My Applications</a>
+    <a href="seeker-profile.html" class="nav-item"><svg style="width:16px;height:16px;" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> My Profile</a>
+    <div style="flex:1;"></div>
+    <a href="#" class="nav-item"><svg style="width:16px;height:16px;" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg> Settings</a>
+    <a href="login.html" class="nav-item"><svg style="width:16px;height:16px;" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg> Log out</a>
+  </nav>
+  <div class="sidebar-user">
+    <div class="av">AP</div>
+    <div class="av-info"><div class="name">Arjun Patel</div><div class="role">Job Seeker</div></div>
+  </div>
+</div>
+<div class="main">
+<div class="topbar">
+  <span class="topbar-title">Browse Jobs</span>
+  <div class="topbar-right">
+    <span class="badge badge-blue">2,847 jobs available</span>
+    <button class="btn btn-ghost btn-sm">🔔 Set alert</button>
+  </div>
+</div>
+<div class="page">
+  <div class="card" style="margin-bottom:20px;">
+    <div style="display:flex;gap:10px;align-items:flex-end;flex-wrap:wrap;">
+      <div class="form-group" style="flex:2;min-width:200px;"><label class="label">Job title / keyword</label><input type="text" class="input" placeholder="e.g. React Developer" value="Frontend Developer"></div>
+      <div class="form-group" style="flex:1;min-width:160px;"><label class="label">Location</label><input type="text" class="input" placeholder="City or remote" value="Mumbai, India"></div>
+      <div class="form-group" style="flex:1;min-width:140px;"><label class="label">Job type</label><select class="input"><option>Any type</option><option>Full-time</option><option>Part-time</option><option>Contract</option><option>Remote</option></select></div>
+      <button class="btn btn-primary" style="padding:10px 22px;margin-bottom:1px;">🔍 Search</button>
+    </div>
+  </div>
+  <div style="display:grid;grid-template-columns:230px 1fr;gap:20px;align-items:start;">
+    <div class="card" style="position:sticky;top:70px;">
+      <div style="font-size:14px;font-weight:700;margin-bottom:14px;display:flex;justify-content:space-between;"><span>Filters</span><a href="#" style="font-size:12px;font-weight:400;color:var(--accent);">Clear all</a></div>
+      <div class="form-group" style="margin-bottom:14px;"><label class="label">Experience</label>
+        <div style="display:flex;flex-direction:column;gap:8px;margin-top:6px;">
+          <label class="check-group"><input type="checkbox" checked> Entry (0–2 yrs)</label>
+          <label class="check-group"><input type="checkbox" checked> Mid (2–5 yrs)</label>
+          <label class="check-group"><input type="checkbox"> Senior (5–10 yrs)</label>
+          <label class="check-group"><input type="checkbox"> Lead / Manager</label>
+        </div>
+      </div>
+      <hr class="divider" style="margin:10px 0;">
+      <div class="form-group" style="margin-bottom:14px;"><label class="label">Salary (₹ LPA)</label>
+        <div style="display:flex;gap:8px;margin-top:6px;">
+          <input type="number" class="input" placeholder="Min" value="8" style="width:80px;">
+          <input type="number" class="input" placeholder="Max" value="30" style="width:80px;">
+        </div>
+        <input type="range" min="0" max="100" value="60" style="margin-top:8px;">
+      </div>
+      <hr class="divider" style="margin:10px 0;">
+      <div class="form-group" style="margin-bottom:14px;"><label class="label">Category</label>
+        <div style="display:flex;flex-direction:column;gap:8px;margin-top:6px;">
+          <label class="check-group"><input type="checkbox" checked> Technology</label>
+          <label class="check-group"><input type="checkbox"> Design</label>
+          <label class="check-group"><input type="checkbox"> Marketing</label>
+          <label class="check-group"><input type="checkbox"> Finance</label>
+          <label class="check-group"><input type="checkbox"> Operations</label>
+        </div>
+      </div>
+      <hr class="divider" style="margin:10px 0;">
+      <div class="form-group"><label class="label">Posted within</label>
+        <select class="input" style="margin-top:6px;"><option>Any time</option><option>Last 24 hours</option><option selected>Last 7 days</option><option>Last 30 days</option></select>
+      </div>
+    </div>
+    <div>
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
+        <span style="color:var(--text2);font-size:13.5px;"><strong style="color:var(--text)">148 jobs</strong> for "Frontend Developer"</span>
+        <select class="input" style="width:160px;"><option>Most relevant</option><option>Newest first</option><option>Salary: High to Low</option></select>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:12px;">
+      
+    <div class="card" style="cursor:pointer;transition:.15s;" onmouseenter="this.style.borderColor='var(--accent)'" onmouseleave="this.style.borderColor='var(--border)'">
+      <div style="display:flex;align-items:flex-start;gap:14px;">
+        <div style="width:46px;height:46px;border-radius:10px;background:var(--bg3);border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;">⚛️</div>
+        <div style="flex:1;">
+          <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:10px;">
+            <div>
+              <div style="font-size:15px;font-weight:700;margin-bottom:3px;">Senior React Developer</div>
+              <div style="font-size:13px;color:var(--text2);">Razorpay · Mumbai / Remote</div>
+            </div>
+            <div style="text-align:right;flex-shrink:0;">
+              <div style="font-size:14px;font-weight:700;color:var(--accent3);">₹18–28 LPA</div>
+              <div style="font-size:11.5px;color:var(--text3);margin-top:2px;">2 days ago</div>
+            </div>
+          </div>
+          <div style="display:flex;gap:6px;margin-top:10px;flex-wrap:wrap;"><span class="chip">React</span> <span class="chip">TypeScript</span> <span class="chip">Node.js</span><span class="badge badge-green">Remote</span></div>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-top:12px;padding-top:12px;border-top:1px solid var(--border);">
+        <span style="font-size:12px;color:var(--text3);">⏱ 2d ago · 👥 234 applicants</span>
+        <div style="display:flex;gap:8px;">
+          <button class="btn btn-ghost btn-sm">♡ Save</button>
+          <button class="btn btn-primary btn-sm" onclick="window.location='seeker-apply.html'">Apply now</button>
+        </div>
+      </div>
+    </div>
+    <div class="card" style="cursor:pointer;transition:.15s;" onmouseenter="this.style.borderColor='var(--accent)'" onmouseleave="this.style.borderColor='var(--border)'">
+      <div style="display:flex;align-items:flex-start;gap:14px;">
+        <div style="width:46px;height:46px;border-radius:10px;background:var(--bg3);border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;">🎨</div>
+        <div style="flex:1;">
+          <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:10px;">
+            <div>
+              <div style="font-size:15px;font-weight:700;margin-bottom:3px;">UI/UX Designer</div>
+              <div style="font-size:13px;color:var(--text2);">Swiggy Design · Bangalore</div>
+            </div>
+            <div style="text-align:right;flex-shrink:0;">
+              <div style="font-size:14px;font-weight:700;color:var(--accent3);">₹12–20 LPA</div>
+              <div style="font-size:11.5px;color:var(--text3);margin-top:2px;">5 days ago</div>
+            </div>
+          </div>
+          <div style="display:flex;gap:6px;margin-top:10px;flex-wrap:wrap;"><span class="chip">Figma</span> <span class="chip">React</span> <span class="chip">CSS</span><span class="badge badge-blue">Full-time</span></div>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-top:12px;padding-top:12px;border-top:1px solid var(--border);">
+        <span style="font-size:12px;color:var(--text3);">⏱ 5d ago · 👥 89 applicants</span>
+        <div style="display:flex;gap:8px;">
+          <button class="btn btn-ghost btn-sm">♡ Save</button>
+          <button class="btn btn-primary btn-sm" onclick="window.location='seeker-apply.html'">Apply now</button>
+        </div>
+      </div>
+    </div>
+    <div class="card" style="cursor:pointer;transition:.15s;" onmouseenter="this.style.borderColor='var(--accent)'" onmouseleave="this.style.borderColor='var(--border)'">
+      <div style="display:flex;align-items:flex-start;gap:14px;">
+        <div style="width:46px;height:46px;border-radius:10px;background:var(--bg3);border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;">🔧</div>
+        <div style="flex:1;">
+          <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:10px;">
+            <div>
+              <div style="font-size:15px;font-weight:700;margin-bottom:3px;">Full Stack Engineer</div>
+              <div style="font-size:13px;color:var(--text2);">Zepto · Gurgaon</div>
+            </div>
+            <div style="text-align:right;flex-shrink:0;">
+              <div style="font-size:14px;font-weight:700;color:var(--accent3);">₹15–25 LPA</div>
+              <div style="font-size:11.5px;color:var(--text3);margin-top:2px;">1 day ago</div>
+            </div>
+          </div>
+          <div style="display:flex;gap:6px;margin-top:10px;flex-wrap:wrap;"><span class="chip">Vue.js</span> <span class="chip">Python</span> <span class="chip">PostgreSQL</span><span class="badge badge-yellow">Hybrid</span></div>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-top:12px;padding-top:12px;border-top:1px solid var(--border);">
+        <span style="font-size:12px;color:var(--text3);">⏱ 1d ago · 👥 312 applicants</span>
+        <div style="display:flex;gap:8px;">
+          <button class="btn btn-ghost btn-sm">♡ Save</button>
+          <button class="btn btn-primary btn-sm" onclick="window.location='seeker-apply.html'">Apply now</button>
+        </div>
+      </div>
+    </div>
+    <div class="card" style="cursor:pointer;transition:.15s;" onmouseenter="this.style.borderColor='var(--accent)'" onmouseleave="this.style.borderColor='var(--border)'">
+      <div style="display:flex;align-items:flex-start;gap:14px;">
+        <div style="width:46px;height:46px;border-radius:10px;background:var(--bg3);border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;">📱</div>
+        <div style="flex:1;">
+          <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:10px;">
+            <div>
+              <div style="font-size:15px;font-weight:700;margin-bottom:3px;">Mobile Developer</div>
+              <div style="font-size:13px;color:var(--text2);">CRED · Bangalore</div>
+            </div>
+            <div style="text-align:right;flex-shrink:0;">
+              <div style="font-size:14px;font-weight:700;color:var(--accent3);">₹14–22 LPA</div>
+              <div style="font-size:11.5px;color:var(--text3);margin-top:2px;">3 days ago</div>
+            </div>
+          </div>
+          <div style="display:flex;gap:6px;margin-top:10px;flex-wrap:wrap;"><span class="chip">React Native</span> <span class="chip">iOS</span><span class="badge badge-green">Remote</span></div>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-top:12px;padding-top:12px;border-top:1px solid var(--border);">
+        <span style="font-size:12px;color:var(--text3);">⏱ 3d ago · 👥 156 applicants</span>
+        <div style="display:flex;gap:8px;">
+          <button class="btn btn-ghost btn-sm">♡ Save</button>
+          <button class="btn btn-primary btn-sm" onclick="window.location='seeker-apply.html'">Apply now</button>
+        </div>
+      </div>
+    </div>
+    <div class="card" style="cursor:pointer;transition:.15s;" onmouseenter="this.style.borderColor='var(--accent)'" onmouseleave="this.style.borderColor='var(--border)'">
+      <div style="display:flex;align-items:flex-start;gap:14px;">
+        <div style="width:46px;height:46px;border-radius:10px;background:var(--bg3);border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;">🤖</div>
+        <div style="flex:1;">
+          <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:10px;">
+            <div>
+              <div style="font-size:15px;font-weight:700;margin-bottom:3px;">Frontend Dev — AI Products</div>
+              <div style="font-size:13px;color:var(--text2);">Anthropic · Remote</div>
+            </div>
+            <div style="text-align:right;flex-shrink:0;">
+              <div style="font-size:14px;font-weight:700;color:var(--accent3);">₹20–35 LPA</div>
+              <div style="font-size:11.5px;color:var(--text3);margin-top:2px;">Just posted</div>
+            </div>
+          </div>
+          <div style="display:flex;gap:6px;margin-top:10px;flex-wrap:wrap;"><span class="chip">React</span> <span class="chip">TypeScript</span><span class="badge badge-purple">Remote</span></div>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-top:12px;padding-top:12px;border-top:1px solid var(--border);">
+        <span style="font-size:12px;color:var(--text3);">⏱ 1h ago · 👥 42 applicants</span>
+        <div style="display:flex;gap:8px;">
+          <button class="btn btn-ghost btn-sm">♡ Save</button>
+          <button class="btn btn-primary btn-sm" onclick="window.location='seeker-apply.html'">Apply now</button>
+        </div>
+      </div>
+    </div>
+      </div>
+      <div style="display:flex;justify-content:center;gap:8px;margin-top:22px;">
+        <button class="btn btn-ghost btn-sm">← Prev</button>
+        <button class="btn btn-primary btn-sm">1</button>
+        <button class="btn btn-ghost btn-sm">2</button>
+        <button class="btn btn-ghost btn-sm">3</button>
+        <button class="btn btn-ghost btn-sm">Next →</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+</body>
+</html>
