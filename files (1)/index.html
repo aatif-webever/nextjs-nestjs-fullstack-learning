@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>JobSphere — UI Kit Index</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#070c1a;--bg2:#0d1529;--bg3:#111e38;--card:#0f1a30;--border:#1e3055;--border2:#243860;--accent:#4f9cf9;--accent2:#7c3aed;--accent3:#10b981;--text:#e2e8f0;--text2:#94a3b8;--text3:#475569;--radius:10px;--radius2:14px;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;padding:40px 24px;}
+h1,h2,h3{font-family:'Sora',sans-serif;font-weight:700;}
+.hero{text-align:center;max-width:600px;margin:0 auto 48px;}
+.logo{width:52px;height:52px;border-radius:14px;background:linear-gradient(135deg,#4f9cf9,#7c3aed);display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:700;color:#fff;margin:0 auto 16px;}
+.hero h1{font-size:32px;margin-bottom:8px;}
+.hero p{color:var(--text2);font-size:15px;}
+.section{max-width:960px;margin:0 auto 36px;}
+.section h2{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--text3);margin-bottom:14px;}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px;}
+.link-card{display:flex;align-items:center;gap:14px;padding:16px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius2);text-decoration:none;color:var(--text);transition:.15s;}
+.link-card:hover{border-color:var(--accent);background:rgba(79,156,249,.05);}
+.link-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;}
+.link-card .name{font-weight:700;font-size:14px;margin-bottom:2px;}
+.link-card .desc{font-size:12px;color:var(--text2);}
+.badge{display:inline-flex;align-items:center;padding:2px 8px;border-radius:20px;font-size:11px;font-weight:700;}
+.badge-blue{background:rgba(79,156,249,.12);color:#4f9cf9;}
+.badge-purple{background:rgba(124,58,237,.12);color:#a78bfa;}
+.badge-green{background:rgba(16,185,129,.12);color:#10b981;}
+.badge-red{background:rgba(239,68,68,.12);color:#ef4444;}
+</style>
+</head>
+<body>
+<div class="hero">
+  <div class="logo">J</div>
+  <h1>JobSphere UI Kit</h1>
+  <p>12 production-ready HTML pages for the full-stack job board project.<br>Click any page to open it.</p>
+</div>
+
+<div class="section">
+  <h2>🔐 Authentication — 3 pages</h2>
+  <div class="grid">
+    <a href="login.html" class="link-card"><div class="link-icon" style="background:rgba(79,156,249,.1);">🔑</div><div><div class="name">Login <span class="badge badge-blue">Auth</span></div><div class="desc">Email, password, OAuth, role tabs</div></div></a>
+    <a href="register.html" class="link-card"><div class="link-icon" style="background:rgba(124,58,237,.1);">📝</div><div><div class="name">Register <span class="badge badge-blue">Auth</span></div><div class="desc">Role select, all inputs, password strength</div></div></a>
+    <a href="forgot-password.html" class="link-card"><div class="link-icon" style="background:rgba(245,158,11,.1);">🔐</div><div><div class="name">Forgot Password <span class="badge badge-blue">Auth</span></div><div class="desc">Reset flow with multi-step states</div></div></a>
+  </div>
+</div>
+
+<div class="section">
+  <h2>👤 Job Seeker — 3 pages</h2>
+  <div class="grid">
+    <a href="seeker-browse.html" class="link-card"><div class="link-icon" style="background:rgba(16,185,129,.1);">🔍</div><div><div class="name">Browse Jobs <span class="badge badge-green">Seeker</span></div><div class="desc">Search, filters, job cards, pagination</div></div></a>
+    <a href="seeker-profile.html" class="link-card"><div class="link-icon" style="background:rgba(16,185,129,.1);">👤</div><div><div class="name">My Profile <span class="badge badge-green">Seeker</span></div><div class="desc">Avatar, all field types, file upload, tags</div></div></a>
+    <a href="seeker-apply.html" class="link-card"><div class="link-icon" style="background:rgba(16,185,129,.1);">📋</div><div><div class="name">Apply for Job <span class="badge badge-green">Seeker</span></div><div class="desc">Application form, cover letter, screening</div></div></a>
+  </div>
+</div>
+
+<div class="section">
+  <h2>🏢 Recruiter — 3 pages</h2>
+  <div class="grid">
+    <a href="recruiter-post-job.html" class="link-card"><div class="link-icon" style="background:rgba(124,58,237,.1);">➕</div><div><div class="name">Post a Job <span class="badge badge-purple">Recruiter</span></div><div class="desc">Rich text, tags, salary, benefits checkboxes</div></div></a>
+    <a href="recruiter-listings.html" class="link-card"><div class="link-icon" style="background:rgba(124,58,237,.1);">💼</div><div><div class="name">My Listings <span class="badge badge-purple">Recruiter</span></div><div class="desc">Stats dashboard + data table + actions</div></div></a>
+    <a href="recruiter-applicants.html" class="link-card"><div class="link-icon" style="background:rgba(124,58,237,.1);">👥</div><div><div class="name">Applicants <span class="badge badge-purple">Recruiter</span></div><div class="desc">Applicant cards, status dropdown, filters</div></div></a>
+  </div>
+</div>
+
+<div class="section">
+  <h2>🛡️ Admin — 3 pages</h2>
+  <div class="grid">
+    <a href="admin-dashboard.html" class="link-card"><div class="link-icon" style="background:rgba(239,68,68,.1);">📊</div><div><div class="name">Dashboard <span class="badge badge-red">Admin</span></div><div class="desc">Stats, bar chart, live activity feed</div></div></a>
+    <a href="admin-users.html" class="link-card"><div class="link-icon" style="background:rgba(239,68,68,.1);">👥</div><div><div class="name">Manage Users <span class="badge badge-red">Admin</span></div><div class="desc">Table, toggle active, filter, search</div></div></a>
+    <a href="admin-jobs.html" class="link-card"><div class="link-icon" style="background:rgba(239,68,68,.1);">✅</div><div><div class="name">Approve Jobs <span class="badge badge-red">Admin</span></div><div class="desc">Pending review cards, approve/reject actions</div></div></a>
+  </div>
+</div>
+</body>
+</html>
